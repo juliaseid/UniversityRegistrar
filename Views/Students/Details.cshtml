@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model University.Models.Student;
+
+<h2>Student Details</h2>
+<hr />
+<h3>Name: @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h3>
+
+@if(@Model.Courses.Count == 0)
+{
+  <p>This student is not enrolled in any courses!</p>
+}
+else
+{
+  <h4>Course enrollment:</h4>
+  <ul>
+  @foreach(var join in Model.Courses)
+  {
+    <li>@join.Course.Title @join.Course.Number</li>
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add a Course", "AddCourse", new {id = Model.StudentId})</p>
+<p>@Html.ActionLink("Edit Student", "Edit", new { id = Model.StudentId })</p>
+<p>@Html.ActionLink("Delete Student", "Delete", new { id = Model.StudentId })</p>
+<p>@Html.ActionLink("Back to Students", "Index")</p>
